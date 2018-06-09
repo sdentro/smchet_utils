@@ -73,11 +73,9 @@ rm(rho_psi)
 # Create loci file
 loci_file = "loci.txt"
 createLociFile(vcfdat, loci_file, 1,2,4,5)
-
 # Create allelecounts file
 allelecounts_file = "alleleCounts.txt"
 createAlleleCountsFile(vcfdat, datacol, namecol, allelecounts_file)
-
 dpinput_file = "allDirichletProcessInfo.txt"
 # Run preprocessing
 runGetDirichletProcessInfo(loci_file=loci_file,
