@@ -14,12 +14,13 @@ chrpos_assign=paste0(assign$chr, "_", assign$pos)
 missing = setdiff(chrpos, chrpos_assign)
 smchet_asign = rep(0, nrow(vcf))
 smchet_asign[chrpos %in% chrpos_assign] = assign$cluster
+smchet_asign[is.na(smchet_asign)] = 0
 
 # Add cluster for not assigned mutations
 struct = read.table(subcl_struct_file, header=T, stringsAsFactors=F)
 num_clusters = nrow(struct)
-struct = rbind(struct, data.frame(cluster=0, n_ssms=sum(smchet_asign==0), proportion=0, ccf=0))
-struct = struct[with(struct, order(cluster, decreasing=F)),]
+struct = rbind(struct, data.frame(cluster=0, n_ssms=sum(smchet_asign==0 | is.na(smchet_asign)), proportion=0, ccf=0))
+struct = struct[with(struct, order(proportion, decreasing=F)),]
 
 # rename to start counting at 1
 struct$clusterid = 1:nrow(struct)
