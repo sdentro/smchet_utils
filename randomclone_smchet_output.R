@@ -20,7 +20,7 @@ smchet_asign[is.na(smchet_asign)] = 0
 struct = read.table(subcl_struct_file, header=T, stringsAsFactors=F)
 num_clusters = nrow(struct)
 struct = rbind(struct, data.frame(cluster=0, n_ssms=sum(smchet_asign==0 | is.na(smchet_asign)), proportion=0, ccf=0))
-struct = struct[with(struct, order(proportion, decreasing=F)),]
+struct = struct[with(struct, order(proportion, decreasing=T)),]
 
 # rename to start counting at 1
 struct$clusterid = 1:nrow(struct)
